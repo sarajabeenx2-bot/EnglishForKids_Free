@@ -15,7 +15,7 @@ export default function Gallery() {
     <div className="gallery-page">
       <div className="page-header">
         <h1>🖼️ My Art Gallery</h1>
-        <p>Your colored drawings, certificates, and achievement rewards!</p>
+        <p>Your colored drawings and achievement badges!</p>
       </div>
 
       <h2 className="section-title">🎨 Colored Drawings ({progress.artwork.length})</h2>
@@ -35,21 +35,6 @@ export default function Gallery() {
                 <button className="btn btn-outline" onClick={() => handleDownload(art.dataUrl, art.title)}>⬇️ Download</button>
                 <button className="btn btn-outline" onClick={() => window.print()}>🖨️ Print</button>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <h2 className="section-title" style={{ marginTop: '2rem' }}>📜 Certificates ({progress.certificates.length})</h2>
-      {progress.certificates.length === 0 ? (
-        <div className="card empty-gallery"><p>Complete levels to earn certificates!</p></div>
-      ) : (
-        <div className="cert-gallery">
-          {progress.certificates.map(c => (
-            <div key={c.id} className="card cert-gallery-item">
-              <span>📜</span>
-              <h4>{c.title}</h4>
-              <p>{new Date(c.date).toLocaleDateString()}</p>
             </div>
           ))}
         </div>

@@ -9,15 +9,15 @@ export const alphabetData = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter, 
 }))
 
 export const phonicsData = [
-  { sound: 'a', words: ['apple', 'ant', 'alligator'], blend: 'a-t' },
-  { sound: 'b', words: ['ball', 'bear', 'book'], blend: 'b-a-t' },
+  { sound: 'a', words: ['apple', 'ant', 'alligator'], blend: 'a-p-p-l-e' },
+  { sound: 'b', words: ['ball', 'bear', 'book'], blend: 'b-a-ll' },
   { sound: 'c', words: ['cat', 'cup', 'cake'], blend: 'c-a-t' },
   { sound: 'd', words: ['dog', 'duck', 'door'], blend: 'd-o-g' },
   { sound: 'e', words: ['egg', 'elf', 'elephant'], blend: 'e-g-g' },
   { sound: 'f', words: ['fish', 'fan', 'frog'], blend: 'f-i-sh' },
-  { sound: 'g', words: ['goat', 'girl', 'gift'], blend: 'g-o-t' },
+  { sound: 'g', words: ['goat', 'girl', 'gift'], blend: 'g-oa-t' },
   { sound: 'h', words: ['hat', 'hen', 'house'], blend: 'h-a-t' },
-  { sound: 'i', words: ['igloo', 'ink', 'insect'], blend: 'i-n' },
+  { sound: 'i', words: ['igloo', 'ink', 'insect'], blend: 'i-g-l-oo' },
   { sound: 'j', words: ['jam', 'jet', 'juice'], blend: 'j-a-m' },
 ]
 
@@ -185,14 +185,73 @@ export const worksheets: Worksheet[] = [
   { id: 'ws-read', title: 'Short Reading Passage', category: 'Reading Worksheets', content: 'Read about the garden and answer questions.' },
   { id: 'ws-grammar', title: 'Nouns and Verbs', category: 'Grammar Worksheets', content: 'Circle nouns and underline verbs in sentences.' },
   { id: 'ws-spell', title: 'Spelling Practice', category: 'Spelling Worksheets', content: 'Fill in missing letters to complete words.' },
-  { id: 'ws-color', title: 'Garden Coloring Sheet', category: 'Coloring Worksheets', content: 'Color the garden scene with rabbit, owl, and flowers.' },
+  { id: 'ws-color-teddy', title: 'Teddy Bear Coloring Sheet', category: 'Coloring Worksheets', content: 'Color the cute teddy bear picnic scene.' },
+  { id: 'ws-color-animals', title: 'Animals Coloring Sheet', category: 'Coloring Worksheets', content: 'Color adorable animals in the forest.' },
+  { id: 'ws-color-icecream', title: 'Ice Cream Coloring Sheet', category: 'Coloring Worksheets', content: 'Color delicious ice cream cones and sundae treats.' },
+  { id: 'ws-color-flowers', title: 'Beautiful Flowers Coloring Sheet', category: 'Coloring Worksheets', content: 'Color beautiful blooming garden flowers.' },
+  { id: 'ws-color-nature', title: 'Garden Coloring Sheet', category: 'Coloring Worksheets', content: 'Color the garden scene with trees, flowers, and sunshine.' },
+  { id: 'ws-color-space', title: 'Space Adventure Coloring Sheet', category: 'Coloring Worksheets', content: 'Color rocket ships, planets, and astronauts.' },
+  { id: 'ws-color-sports', title: 'Sports Coloring Sheet', category: 'Coloring Worksheets', content: 'Color action-packed sports equipment and fields.' },
+  { id: 'ws-color-fantasy', title: 'Magic Unicorn Coloring Sheet', category: 'Coloring Worksheets', content: 'Color a magical unicorn in a fairytale land.' },
+  { id: 'ws-color-educational', title: 'Letters & Numbers Coloring Sheet', category: 'Coloring Worksheets', content: 'Color and learn letters and numbers.' },
+  { id: 'ws-color-dino', title: 'Dinosaur Coloring Sheet', category: 'Coloring Worksheets', content: 'Color a friendly dinosaur stomping around.' },
+  { id: 'ws-color-castle', title: 'Magic Castle Coloring Sheet', category: 'Coloring Worksheets', content: 'Color a beautiful fairytale castle with flags.' },
+  { id: 'ws-color-underwater', title: 'Underwater World Coloring Sheet', category: 'Coloring Worksheets', content: 'Color funny fish, octopus, and sea plants.' },
 ]
 
 export const seasonalEvents: SeasonalEvent[] = [
-  { id: 'summer', name: 'Summer Reading Challenge', description: 'Read 5 stories this summer and earn a special badge!', emoji: '☀️', season: 'Summer' },
-  { id: 'winter', name: 'Winter Vocabulary Challenge', description: 'Learn 20 winter words and unlock bonus rewards!', emoji: '❄️', season: 'Winter' },
-  { id: 'ramadan', name: 'Ramadan Reading Challenge', description: 'Enjoy peaceful bedtime stories during Ramadan.', emoji: '🌙', season: 'Ramadan' },
-  { id: 'holiday', name: 'Holiday Learning Events', description: 'Special games and stories for the holidays!', emoji: '🎄', season: 'Holiday' },
+  {
+    id: 'summer',
+    name: '☀️ Summer Adventure Challenge',
+    description: 'Dive into summer learning!',
+    emoji: '☀️',
+    season: 'Summer',
+    challenges: [
+      { title: '🌊 Beach Words', task: 'Learn 10 beach & ocean words: wave, sand, shell, swim, sunscreen, coral, anchor, tide, seagull, beach.' },
+      { title: '🌈 Rainbow Art Story', task: 'Read "The Rainbow Lesson" and draw your own rainbow with 6 colors. Write the color name next to each stripe!' },
+      { title: '🍦 Summer Spelling Bee', task: 'Spell these summer words out loud: sunshine, sandcastle, umbrella, watermelon, butterfly, lemonade.' },
+      { title: '🌻 Nature Walk Journal', task: 'Go outside and find 5 things from nature. Draw them and write the English name for each one.' },
+    ]
+  },
+  {
+    id: 'winter',
+    name: '❄️ Winter Wonderland Challenge',
+    description: 'Cozy up with winter learning fun!',
+    emoji: '❄️',
+    season: 'Winter',
+    challenges: [
+      { title: '⛄ Snowman Story', task: 'Create a short story about a snowman! Use these words: cold, snow, scarf, carrot, magic, melt. Write at least 4 sentences.' },
+      { title: '🧤 Winter Word Wall', task: 'Learn 10 winter words: blizzard, frost, icicle, mittens, fireplace, hibernate, snowflake, cozy, hot chocolate, avalanche.' },
+      { title: '🎅 Holiday Vocabulary', task: 'Match each winter holiday word to its meaning: chimney, reindeer, sleigh, ornament, wreath, carol, festive, celebrate.' },
+      { title: '🌨️ Describe the Weather', task: 'Practice describing winter weather! Say 3 sentences about cold weather using: It is..., The sky looks..., I feel...' },
+    ]
+  },
+  {
+    id: 'ramadan',
+    name: '🌙 Ramadan Reading Challenge',
+    description: 'Peaceful stories and mindful learning!',
+    emoji: '🌙',
+    season: 'Ramadan',
+    challenges: [
+      { title: '📖 Evening Story Time', task: 'Read "Sleepy Moon Stories" and "Ollie the Sharing Owl". After each story, write one sentence about what you learned.' },
+      { title: '🤝 Kindness Word Journal', task: 'Write 5 sentences about kindness using these words: share, help, give, smile, care, friend, together, grateful.' },
+      { title: '🌟 Good Deeds Diary', task: 'For 3 days, write one English sentence each day about a good deed you did. Example: "Today I helped my sister."' },
+      { title: '🕌 Vocabulary of Giving', task: 'Learn these words and use each in a sentence: generous, grateful, peaceful, blessing, community, celebrate, charity, tradition.' },
+    ]
+  },
+  {
+    id: 'holiday',
+    name: '🎄 Holiday Celebration Challenge',
+    description: 'Festive fun with English learning!',
+    emoji: '🎄',
+    season: 'Holiday',
+    challenges: [
+      { title: '🎁 Gift Description Game', task: 'Describe a gift without saying its name! Use adjectives: color, size, shape, what it does. Can your family guess what it is?' },
+      { title: '🎶 Holiday Song Writing', task: 'Write 4 lines of your own English holiday song! It can be about anything festive. Try to make two lines rhyme!' },
+      { title: '✉️ Holiday Card Writing', task: 'Write a holiday card message in English to a friend or family member. Include: a greeting, a kind wish, and your signature.' },
+      { title: '🍪 Recipe Vocabulary', task: 'Learn holiday cooking words: ingredient, mix, bake, sprinkle, decorate, oven, recipe, delicious, aroma, tradition.' },
+    ]
+  },
 ]
 
 export const coloringCategories = [
@@ -205,6 +264,9 @@ export const coloringCategories = [
   { id: 'sports', name: 'Sports', emoji: '⚽' },
   { id: 'fantasy', name: 'Fantasy Art', emoji: '🦄' },
   { id: 'educational', name: 'Educational Sheets', emoji: '📖' },
+  { id: 'dinosaur', name: 'Dinosaurs', emoji: '🦖' },
+  { id: 'castle', name: 'Magic Castle', emoji: '🏰' },
+  { id: 'underwater', name: 'Underwater', emoji: '🐙' },
 ]
 
 export const storyCategories = ['Moral Stories', 'Animal Stories', 'Adventure Stories', 'Bedtime Stories', 'Educational Stories']

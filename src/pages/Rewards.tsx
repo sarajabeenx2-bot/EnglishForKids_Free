@@ -2,37 +2,13 @@ import { useProgress, LEVEL_NAMES } from '../context/ProgressContext'
 import './Rewards.css'
 
 export default function Rewards() {
-  const { profile, progress, getLevelName, getLevelProgress } = useProgress()
-
-  const printCertificate = (title: string, childName?: string) => {
-    const displayName = childName || profile.name || 'Young Learner'
-    const win = window.open('', '_blank')
-    if (!win) return
-    win.document.write(`
-      <html><head><title>Certificate</title>
-      <style>
-        body { font-family: Georgia, serif; text-align: center; padding: 60px; background: #fffef5; }
-        h1 { color: #5BA85E; font-size: 2.5rem; }
-        .cert { border: 8px double #FFD93D; padding: 40px; max-width: 600px; margin: 0 auto; }
-        .name { font-size: 2rem; color: #2D3748; margin: 20px 0; }
-      </style></head><body>
-      <div class="cert">
-        <h1>🌻 Certificate of Achievement</h1>
-        <p>This certifies that</p>
-        <div class="name">${displayName}</div>
-        <p>has earned: <strong>${title}</strong></p>
-        <p>EnglishForKidsFree</p>
-        <p>${new Date().toLocaleDateString()}</p>
-      </div>
-      <script>window.print()</script></body></html>
-    `)
-  }
+  const { progress, getLevelName, getLevelProgress } = useProgress()
 
   return (
     <div className="rewards-page">
       <div className="page-header">
         <h1>⭐ Rewards & Achievements</h1>
-        <p>Your stars, badges, XP, and certificates!</p>
+        <p>Your stars, badges, XP, and learning streak!</p>
       </div>
 
       <div className="rewards-stats card-grid">
@@ -84,27 +60,7 @@ export default function Rewards() {
           </div>
         )}
       </div>
-
-      <div className="certificates-section card">
-        <h2>📜 Certificates ({progress.certificates.length})</h2>
-        {progress.certificates.length === 0 ? (
-          <p className="empty-msg">Level up to earn certificates!</p>
-        ) : (
-          <div className="cert-grid">
-            {progress.certificates.map(c => (
-              <div key={c.id} className="cert-item">
-                <span>📜</span>
-                <h4>{c.title}</h4>
-                <p>{new Date(c.date).toLocaleDateString()}</p>
-                <button className="btn btn-outline" onClick={() => printCertificate(c.title)}>🖨️ Print</button>
-              </div>
-            ))}
-          </div>
-        )}
-        <button className="btn btn-primary" style={{ marginTop: '1rem' }} onClick={() => printCertificate(getLevelName())}>
-          Generate Level Certificate
-        </button>
-      </div>
     </div>
   )
+
 }

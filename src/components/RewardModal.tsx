@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
 import { rewardChoices } from '../data/content'
 import { useProgress } from '../context/ProgressContext'
+import './RewardModal.css'
 
 interface Props {
   onClose: () => void
 }
 
 export default function RewardModal({ onClose }: Props) {
-  const { addXP, addStars, addBadge, unlockColoring } = useProgress()
+  const { addXP, addStars, addBadge, unlockColoring, playSound } = useProgress()
+  const [chestState, setChestState] = useState<'closed' | 'shaking' | 'opened'>('closed')
   const [selected, setSelected] = useState<string | null>(null)
-  const [claimed, setClaimed] = useState(false)
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
@@ -17,33 +18,48 @@ export default function RewardModal({ onClose }: Props) {
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
-  const handleChoose = (id: string) => {
-    if (claimed) return
-    setClaimed(true)
-    setSelected(id)
-    switch (id) {
-      case 'coloring':
-        unlockColoring('flowers')
-        break
-      case 'badge':
-        addBadge('Lesson Star')
-        break
-      case 'story':
-        addXP(10)
-        break
-      case 'game':
-        addXP(15)
-        break
-      case 'xp':
-        addXP(30)
-        break
-      case 'surprise':
-        addStars(5)
-        addXP(20)
-        addBadge('Lucky Learner')
-        break
-    }
-    setTimeout(onClose, 2000)
+  const handleOpenChest = () => {
+    if (chestState !== 'closed') return
+    setChestState('shaking')
+    playSound('pop')
+    setTimeout(() => {
+      setChestState('opened')
+      playSound('chestOpen')
+
+      // Automatically choose a random reward
+      const randomReward = rewardChoices[Math.floor(Math.random() * rewardChoices.length)]
+      setSelected(randomReward.id)
+      playSound('success')
+
+      switch (randomReward.id) {
+        case 'coloring':
+          unlockColoring('flowers')
+          break
+        case 'badge': {
+          const BADGES = ['Lesson Star', 'Super Scholar', 'Word Wizard', 'Alphabet Champion', 'Grammar Hero', 'Daily Champ']
+          const randomBadge = BADGES[Math.floor(Math.random() * BADGES.length)]
+          addBadge(randomBadge)
+          break
+        }
+        case 'story':
+          addXP(10)
+          break
+        case 'game':
+          addXP(15)
+          break
+        case 'xp':
+          addXP(30)
+          break
+        case 'surprise': {
+          const BADGES = ['Lucky Learner', 'Treasure Hunter', 'Magic Finder', 'Confetti Popper']
+          const randomBadge = BADGES[Math.floor(Math.random() * BADGES.length)]
+          addStars(5)
+          addXP(20)
+          addBadge(randomBadge)
+          break
+        }
+      }
+    }, 1000)
   }
 
   const chosen = rewardChoices.find(r => r.id === selected)
@@ -57,25 +73,31 @@ export default function RewardModal({ onClose }: Props) {
         aria-modal="true"
         aria-labelledby="reward-title"
       >
-        {!selected ? (
-          <>
-            <h2 id="reward-title">🎉 Great Job! Choose Your Reward!</h2>
-            <p>Pick one special reward for completing your lesson.</p>
-            <div className="card-grid" style={{ marginTop: '1.5rem' }}>
-              {rewardChoices.map(r => (
-                <button key={r.id} className="card reward-choice" onClick={() => handleChoose(r.id)} disabled={claimed}>
-                  <span style={{ fontSize: '2.5rem' }}>{r.emoji}</span>
-                  <span style={{ fontWeight: 700 }}>{r.label}</span>
-                </button>
-              ))}
-            </div>
-          </>
+        {chestState !== 'opened' ? (
+          <div className="chest-intro">
+            <h2 id="reward-title">🎁 You Found a Treasure Chest!</h2>
+            <p>Tap the magical chest to unlock your rewards!</p>
+            
+            <button 
+              className={`chest-button ${chestState === 'shaking' ? 'shake-anim' : 'bounce-anim'}`} 
+              onClick={handleOpenChest}
+              disabled={chestState === 'shaking'}
+              aria-label="Open treasure chest"
+            >
+              🔒📦
+            </button>
+            
+            {chestState === 'shaking' && <p className="chest-opening-text">Opening...</p>}
+          </div>
         ) : (
-          <>
-            <div className="emoji">{chosen?.emoji}</div>
+          <div className="reward-claimed">
+            <div className="emoji claimed-emoji float-anim">{chosen?.emoji}</div>
             <h2>You got: {chosen?.label}!</h2>
-            <p>Keep learning and earning more rewards! 🌟</p>
-          </>
+            <p style={{ marginBottom: '1.5rem' }}>Keep learning and earning more rewards! 🌟</p>
+            <button className="btn btn-primary" onClick={onClose}>
+              Awesome! ➔
+            </button>
+          </div>
         )}
       </div>
     </div>

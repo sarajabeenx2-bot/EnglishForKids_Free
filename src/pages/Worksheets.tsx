@@ -10,7 +10,18 @@ const WORKSHEET_EMOJI: Record<string, string> = {
   'ws-read': '📖',
   'ws-grammar': '📝',
   'ws-spell': '✍️',
-  'ws-color': '🎨',
+  'ws-color-teddy': '🧸',
+  'ws-color-animals': '🐾',
+  'ws-color-icecream': '🍦',
+  'ws-color-flowers': '🌸',
+  'ws-color-nature': '🌿',
+  'ws-color-space': '🚀',
+  'ws-color-sports': '⚽',
+  'ws-color-fantasy': '🦄',
+  'ws-color-educational': '📖',
+  'ws-color-dino': '🦖',
+  'ws-color-castle': '🏰',
+  'ws-color-underwater': '🐙',
 }
 
 export default function Worksheets() {
@@ -34,7 +45,7 @@ export default function Worksheets() {
                 <p>{ws.content}</p>
                 <ul className="ws-features">
                   {ws.id.includes('alpha') || ws.id === 'ws-trace' ? <li>✏️ Letter & word tracing</li> : null}
-                  {ws.id === 'ws-vocab' || ws.id === 'ws-color' ? <li>🎨 Pictures to color</li> : null}
+                  {ws.id === 'ws-vocab' || ws.id.startsWith('ws-color') ? <li>🎨 Pictures to color</li> : null}
                   {ws.id === 'ws-read' ? <li>📖 Reading & questions</li> : null}
                   {ws.id === 'ws-grammar' ? <li>📝 Grammar exercises</li> : null}
                   {ws.id === 'ws-spell' ? <li>✍️ Spelling blanks</li> : null}

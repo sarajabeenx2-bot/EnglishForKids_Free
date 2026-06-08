@@ -1,149 +1,388 @@
-.hero {
-  padding: 2.5rem;
-  margin-bottom: 1.5rem;
+/* Clouds Drifting background */
+.map-sky-clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 500px;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.drift-cloud {
+  position: absolute;
+  color: #ffffff;
+  opacity: 0.35;
+  user-select: none;
+}
+
+.cloud-a { top: 5%; left: -50px; animation: cloud-drift-left 35s linear infinite; }
+.cloud-b { top: 25%; right: -50px; animation: cloud-drift-right 45s linear infinite; }
+.cloud-c { top: 40%; left: -50px; animation: cloud-drift-left 55s linear infinite; }
+
+@keyframes cloud-drift-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(110vw); }
+}
+
+@keyframes cloud-drift-right {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-110vw); }
+}
+
+/* Character Guide banner */
+.character-guide-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #ffffff;
+  border-left: 6px solid var(--sky-blue);
+  box-shadow: var(--card-shadow);
+  margin-bottom: 2rem;
+  padding: 1.25rem 2rem;
+}
+
+.guide-character {
+  font-size: 3.5rem;
+  user-select: none;
+}
+
+.guide-bubble {
+  position: relative;
+  background: #f1f5f9;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  flex: 1;
+  border: 1px solid #cbd5e1;
+}
+
+.guide-bubble::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background: #f1f5f9;
+  border-left: 1px solid #cbd5e1;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+.guide-bubble p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* Adventure Map Section */
+.adventure-map-section {
+  background: linear-gradient(180deg, #b8e4f9 0%, #a8e6cf 50%, #7bc67e 100%) !important;
+  border: 8px solid #3c8f5e;
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.15), var(--card-shadow);
+  padding: 2.5rem 2rem;
   overflow: hidden;
 }
 
-.hero-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--soft-green-dark), var(--sky-blue));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-sub {
+.map-subtitle {
+  text-align: center;
   font-size: 1.15rem;
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
-  max-width: 500px;
-}
-
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.hero-mascots {
-  display: flex;
-  gap: 1rem;
-  font-size: 4rem;
-}
-
-.mascot.bounce {
-  animation: bounce-gentle 2s ease-in-out infinite;
-}
-
-.mascot.delay-1 { animation-delay: -0.5s; }
-.mascot.delay-2 { animation-delay: -1s; }
-
-.welcome-banner {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  border-left: 5px solid var(--sunshine-yellow);
-}
-
-.buddy-emoji { font-size: 3rem; }
-
-.welcome-stats {
-  display: flex;
-  gap: 1.5rem;
-  margin-left: auto;
-  text-align: center;
-}
-
-.welcome-stats strong {
-  display: block;
-  font-size: 1.5rem;
-  font-family: var(--font-display);
-}
-
-.progress-section { margin-bottom: 1.5rem; }
-
-.level-info {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-weight: 600;
-}
-
-.level-badge {
-  background: var(--sunshine-yellow);
-  padding: 0.25rem 0.75rem;
-  border-radius: 50px;
-  font-size: 0.85rem;
-}
-
-.levels-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.level-step {
-  text-align: center;
-  padding: 0.75rem;
-  border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.04);
-  opacity: 0.5;
-}
-
-.level-step.completed {
-  background: rgba(123, 198, 126, 0.2);
-  opacity: 1;
-}
-
-.level-step.current {
-  background: rgba(255, 217, 61, 0.3);
-  opacity: 1;
-  border: 2px solid var(--sunshine-yellow);
-}
-
-.level-num {
-  display: block;
-  font-size: 1.25rem;
+  color: var(--text-dark);
   font-weight: 700;
-  font-family: var(--font-display);
+  margin-bottom: 2.5rem;
 }
 
-.level-name { font-size: 0.75rem; }
-
-.quick-links, .seasonal-section { margin-bottom: 2rem; }
-
-.quick-card {
-  text-align: center;
-  text-decoration: none;
-  color: inherit;
-}
-
-.quick-emoji { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
-.quick-card h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
-.quick-card p { font-size: 0.85rem; color: var(--text-muted); }
-
-.seasonal-card { text-align: center; }
-.seasonal-emoji { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
-.seasonal-card .btn { margin-top: 1rem; }
-
-.reward-choice {
-  cursor: pointer;
+.adventure-map-container {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
+}
+
+/* Animated map river */
+.map-river {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  bottom: 10%;
+  width: 60px;
+  background: rgba(110, 207, 255, 0.4);
+  border-radius: 50px;
+  z-index: 1;
+  font-size: 1.5rem;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  border: none;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  writing-mode: vertical-rl;
+  animation: river-wave 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes river-wave {
+  0% { transform: translateX(-5px) skewX(-2deg); }
+  100% { transform: translateX(5px) skewX(2deg); }
+}
+
+.map-path-wind {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* Node layout alignment alternating */
+.map-node-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.map-node-container.align-left {
+  justify-content: flex-start;
+}
+
+.map-node-container.align-right {
+  justify-content: flex-end;
+}
+
+/* Connectors paths between worlds — stylized zigzag trail */
+.path-connector {
+  position: absolute;
+  bottom: -4.2rem;
+  width: 80px;
+  height: 4.8rem;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.path-connector::before,
+.path-connector::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* The dirt trail track */
+.path-connector::before {
+  border-left: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    #8B5E3C 0px,
+    #8B5E3C 6px,
+    transparent 6px,
+    transparent 14px
+  );
+  width: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+/* Decorative dots along the path */
+.path-connector::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.75) 0px,
+    rgba(255,255,255,0.75) 3px,
+    transparent 3px,
+    transparent 14px
+  );
+  width: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.align-left .path-connector {
+  left: 80px;
+  transform: rotate(18deg);
+  transform-origin: top center;
+}
+
+.align-right .path-connector {
+  right: 80px;
+  transform: rotate(-18deg);
+  transform-origin: top center;
+}
+
+/* World Card styles */
+.map-world-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 380px;
+  background: #ffffff;
+  border: 4px solid #cbd5e1;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: all var(--transition);
+  position: relative;
+}
+
+.map-world-card.unlocked:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.map-world-card.unlocked {
+  border-color: var(--sky-blue);
+}
+
+.map-world-card.completed {
+  border-color: var(--soft-green);
+  background: #f0fdf4;
+}
+
+.map-world-card.locked {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  box-shadow: none;
+}
+
+.world-emoji {
+  font-size: 3.5rem;
+  user-select: none;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.world-icon-svg {
+  width: 3.5rem;
+  height: 3.5rem;
+  stroke-width: 2.25px;
+}
+
+.node-village .world-icon-svg { color: #55b67e; }
+.node-forest .world-icon-svg { color: var(--soft-green-dark); }
+.node-kingdom .world-icon-svg { color: var(--sunshine-yellow-dark); }
+.node-valley .world-icon-svg { color: var(--coral); }
+.node-mountain .world-icon-svg { color: var(--sky-blue); }
+.node-castle .world-icon-svg { color: var(--light-purple); }
+.node-space .world-icon-svg { color: var(--text-dark); }
+
+.seasonal-icon-svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--soft-green-dark);
+  stroke-width: 2px;
+}
+
+.world-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.world-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-dark);
+}
+
+.world-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.world-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.world-progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.world-progress-fill {
+  height: 100%;
+  background: var(--sky-blue);
+  border-radius: 10px;
+}
+
+.completed .world-progress-fill {
+  background: var(--soft-green);
+}
+
+.world-percentage-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.node-go-btn {
+  align-self: flex-start;
+  padding: 0.35rem 1rem !important;
+  font-size: 0.85rem !important;
+}
+
+.completed .node-go-btn {
+  background: var(--soft-green) !important;
+}
+
+/* Locked Overlay style */
+.lock-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lock-icon {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.lock-condition {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+/* Floating animation keyframes */
+.float-anim {
+  animation: map-float 2.5s ease-in-out infinite;
+}
+
+@keyframes map-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.next-unlock-hint {
+  font-size: 0.95rem;
+  color: var(--text-dark);
   text-align: center;
+  background: #fefcbf;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  border: 1px dashed var(--sunshine-yellow-dark);
+  display: inline-block;
+  margin: 0.5rem auto 0;
 }

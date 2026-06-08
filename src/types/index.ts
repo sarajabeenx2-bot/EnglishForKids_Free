@@ -28,6 +28,8 @@ export interface Progress {
   }
   unlockedColoring: string[]
   dailyChallengeCompleted: boolean
+  treehouseItems: string[]
+  soundEnabled: boolean
 }
 
 export interface Certificate {
@@ -78,10 +80,16 @@ export interface Worksheet {
   content: string
 }
 
+export interface SeasonalChallenge {
+  title: string
+  task: string
+}
+
 export interface SeasonalEvent {
   id: string
   name: string
   description: string
   emoji: string
   season: string
+  challenges?: SeasonalChallenge[]
 }

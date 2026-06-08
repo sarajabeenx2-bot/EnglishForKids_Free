@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, useCallback, useRef, type ReactNode } from 'react'
 import type { UserProfile, Progress, Certificate, Artwork } from '../types'
 
 const PROFILE_KEY = 'efkf_profile'
@@ -25,6 +25,8 @@ const defaultProgress: Progress = {
   performance: { reading: 0, speaking: 0, vocabulary: 0, spelling: 0 },
   unlockedColoring: ['teddy', 'animals'],
   dailyChallengeCompleted: false,
+  treehouseItems: [],
+  soundEnabled: true,
 }
 
 const LEVEL_THRESHOLDS = [0, 100, 300, 600, 1000]
@@ -100,6 +102,11 @@ interface ProgressContextType {
   resetAll: () => void
   isYoungMode: () => boolean
   isAdvancedMode: () => boolean
+  toggleTreehouseItem: (itemId: string) => void
+  toggleSound: () => void
+  playSound: (type: 'success' | 'click' | 'levelUp' | 'chestOpen' | 'pop' | 'wrong') => void
+  levelUpData: { show: boolean; oldLevel: number; newLevel: number }
+  closeLevelUp: () => void
 }
 
 const ProgressContext = createContext<ProgressContextType | null>(null)
@@ -112,6 +119,111 @@ function load<T>(key: string, fallback: T): T {
     return fallback
   }
 }
+
+export function playSynthSound(type: 'success' | 'click' | 'levelUp' | 'chestOpen' | 'pop' | 'wrong') {
+  try {
+    const AudioCtx = window.AudioContext || (window as any).webkitAudioContext
+    if (!AudioCtx) return
+    const ctx = new AudioCtx()
+    const now = ctx.currentTime
+    
+    switch (type) {
+      case 'click': {
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+        osc.type = 'sine'
+        osc.frequency.setValueAtTime(400, now)
+        osc.frequency.exponentialRampToValueAtTime(150, now + 0.1)
+        gain.gain.setValueAtTime(0.1, now)
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1)
+        osc.connect(gain)
+        gain.connect(ctx.destination)
+        osc.start()
+        osc.stop(now + 0.1)
+        break
+      }
+      case 'pop': {
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+        osc.type = 'triangle'
+        osc.frequency.setValueAtTime(150, now)
+        osc.frequency.exponentialRampToValueAtTime(350, now + 0.12)
+        gain.gain.setValueAtTime(0.15, now)
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12)
+        osc.connect(gain)
+        gain.connect(ctx.destination)
+        osc.start()
+        osc.stop(now + 0.12)
+        break
+      }
+      case 'success': {
+        const notes = [261.63, 329.63, 392.00, 523.25]
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator()
+          const gain = ctx.createGain()
+          osc.type = 'triangle'
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08)
+          gain.gain.setValueAtTime(0.1, now + idx * 0.08)
+          gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.08 + 0.25)
+          osc.connect(gain)
+          gain.connect(ctx.destination)
+          osc.start(now + idx * 0.08)
+          osc.stop(now + idx * 0.08 + 0.25)
+        })
+        break
+      }
+      case 'chestOpen': {
+        const notes = [392.00, 523.25, 659.25, 783.99, 1046.50]
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator()
+          const gain = ctx.createGain()
+          osc.type = 'sine'
+          osc.frequency.setValueAtTime(freq, now + idx * 0.06)
+          gain.gain.setValueAtTime(0.12, now + idx * 0.06)
+          gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.06 + 0.22)
+          osc.connect(gain)
+          gain.connect(ctx.destination)
+          osc.start(now + idx * 0.06)
+          osc.stop(now + idx * 0.06 + 0.22)
+        })
+        break
+      }
+      case 'levelUp': {
+        const notes = [261.63, 392.00, 523.25, 392.00, 523.25, 659.25, 783.99]
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator()
+          const gain = ctx.createGain()
+          osc.type = 'sawtooth'
+          osc.frequency.setValueAtTime(freq, now + idx * 0.09)
+          gain.gain.setValueAtTime(0.06, now + idx * 0.09)
+          gain.gain.exponentialRampToValueAtTime(0.005, now + idx * 0.09 + 0.35)
+          osc.connect(gain)
+          gain.connect(ctx.destination)
+          osc.start(now + idx * 0.09)
+          osc.stop(now + idx * 0.09 + 0.35)
+        })
+        break
+      }
+      case 'wrong': {
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+        osc.type = 'sawtooth'
+        osc.frequency.setValueAtTime(120, now)
+        osc.frequency.linearRampToValueAtTime(80, now + 0.3)
+        gain.gain.setValueAtTime(0.15, now)
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3)
+        osc.connect(gain)
+        gain.connect(ctx.destination)
+        osc.start()
+        osc.stop(now + 0.3)
+        break
+      }
+    }
+  } catch (err) {
+    console.error('Sound play error:', err)
+  }
+}
+
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const [profile, setProfileState] = useState<UserProfile>(() => load(PROFILE_KEY, defaultProfile))
@@ -148,10 +260,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   )
 
   const completeLesson = useCallback((id: string, xp = 10): boolean => {
-    let wasNew = false
+    if (progress.completedLessons.includes(id)) return false
     setProgress(prev => {
       if (prev.completedLessons.includes(id)) return prev
-      wasNew = true
       const withXp = applyXp(prev, xp)
       return {
         ...withXp,
@@ -159,8 +270,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         completedLessons: [...withXp.completedLessons, id],
       }
     })
-    return wasNew
-  }, [])
+    return true
+  }, [progress.completedLessons])
 
   const addBadge = useCallback((badge: string) => {
     setProgress(prev => {
@@ -193,11 +304,11 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const completeDailyChallenge = useCallback((): boolean => {
     const today = new Date().toDateString()
     const yesterday = getYesterdayString()
-    let wasNew = false
+    const alreadyDone = progress.lastChallengeDate === today && progress.dailyChallengeCompleted
+    if (alreadyDone) return false
 
     setProgress(prev => {
       if (prev.lastChallengeDate === today && prev.dailyChallengeCompleted) return prev
-      wasNew = true
       const newStreak =
         prev.lastChallengeDate === yesterday ? prev.streak + 1
         : prev.lastChallengeDate === today ? prev.streak
@@ -211,8 +322,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         stars: withXp.stars + 3,
       }
     })
-    return wasNew
-  }, [])
+    return true
+  }, [progress.lastChallengeDate, progress.dailyChallengeCompleted, progress.streak])
 
   const unlockColoring = useCallback((category: string) => {
     setProgress(prev => {
@@ -220,6 +331,41 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       return { ...prev, unlockedColoring: [...prev.unlockedColoring, category] }
     })
   }, [])
+
+  const [levelUpData, setLevelUpData] = useState<{ show: boolean; oldLevel: number; newLevel: number }>({ show: false, oldLevel: 1, newLevel: 1 })
+  const prevLevelRef = useRef(progress.level)
+
+  useEffect(() => {
+    if (progress.level > prevLevelRef.current) {
+      setLevelUpData({ show: true, oldLevel: prevLevelRef.current, newLevel: progress.level })
+      if (progress.soundEnabled) playSynthSound('levelUp')
+    }
+    prevLevelRef.current = progress.level
+  }, [progress.level, progress.soundEnabled])
+
+  const closeLevelUp = useCallback(() => {
+    setLevelUpData(prev => ({ ...prev, show: false }))
+  }, [])
+
+  const toggleTreehouseItem = useCallback((itemId: string) => {
+    setProgress(prev => {
+      const items = prev.treehouseItems ?? []
+      const alreadyPlaced = items.includes(itemId)
+      const nextItems = alreadyPlaced ? items.filter(id => id !== itemId) : [...items, itemId]
+      return { ...prev, treehouseItems: nextItems }
+    })
+    if (progress.soundEnabled) playSynthSound('click')
+  }, [progress.soundEnabled])
+
+  const toggleSound = useCallback(() => {
+    setProgress(prev => ({ ...prev, soundEnabled: !prev.soundEnabled }))
+  }, [])
+
+  const playSound = useCallback((type: 'success' | 'click' | 'levelUp' | 'chestOpen' | 'pop' | 'wrong') => {
+    if (progress.soundEnabled) {
+      playSynthSound(type)
+    }
+  }, [progress.soundEnabled])
 
   const getLevelName = useCallback(() => LEVEL_NAMES[progress.level], [progress.level])
 
@@ -251,6 +397,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       completeLesson, isLessonCompleted, addBadge, addCertificate, saveArtwork,
       updatePerformance, completeDailyChallenge, unlockColoring, getLevelName,
       getLevelProgress, resetLearningProgress, resetAll, isYoungMode, isAdvancedMode,
+      toggleTreehouseItem, toggleSound, playSound, levelUpData, closeLevelUp,
     }}>
       {children}
     </ProgressContext.Provider>

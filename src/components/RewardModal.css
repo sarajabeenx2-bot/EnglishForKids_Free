@@ -1,0 +1,93 @@
+/* Chest button styling */
+.chest-button {
+  font-size: 8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin: 2rem auto;
+  display: block;
+  user-select: none;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+  transition: transform 0.2s ease;
+}
+
+.chest-button:hover {
+  transform: scale(1.05);
+}
+
+.chest-opening-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--sunshine-yellow-dark);
+  font-weight: 700;
+  text-align: center;
+  animation: text-pulse 1s ease-in-out infinite alternate;
+}
+
+/* Chest Bounce */
+.bounce-anim {
+  animation: chest-bounce 2s ease-in-out infinite;
+}
+
+/* Chest Shake */
+.shake-anim {
+  animation: chest-shake 0.8s ease-in-out infinite;
+}
+
+/* claimed emoji float */
+.claimed-emoji {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+}
+
+.float-anim {
+  animation: emoji-float 2.5s ease-in-out infinite;
+}
+
+.bounce-hover {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.bounce-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Keyframes */
+@keyframes chest-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes chest-shake {
+  0%, 100% { transform: rotate(0) scale(1); }
+  20%, 60% { transform: rotate(-8deg) scale(1.02); }
+  40%, 80% { transform: rotate(8deg) scale(1.02); }
+}
+
+@keyframes emoji-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes text-pulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.reward-grid {
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+.reward-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  border: 2px solid var(--sky-blue-light);
+  cursor: pointer;
+}

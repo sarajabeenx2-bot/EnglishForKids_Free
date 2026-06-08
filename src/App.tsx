@@ -20,6 +20,7 @@ import Worksheets from './pages/Worksheets'
 import ParentZone from './pages/ParentZone'
 import StoryCreator from './pages/StoryCreator'
 import InfoPages from './pages/InfoPages'
+import MyTreehouse from './pages/MyTreehouse'
 import './pages/InfoPages.css'
 
 function AppRoutes() {
@@ -44,6 +45,7 @@ function AppRoutes() {
         <Route path="worksheets" element={<Worksheets />} />
         <Route path="parent" element={<ParentZone />} />
         <Route path="story-creator" element={<StoryCreator />} />
+        <Route path="treehouse" element={<MyTreehouse />} />
         <Route path="about" element={<InfoPages />} />
         <Route path="contact" element={<InfoPages />} />
         <Route path="privacy" element={<InfoPages />} />

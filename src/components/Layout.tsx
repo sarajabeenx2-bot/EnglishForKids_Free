@@ -4,10 +4,11 @@ import GardenBackground from './GardenBackground'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import SearchBar from './SearchBar'
+import LevelUpModal from './LevelUpModal'
 import { useProgress } from '../context/ProgressContext'
 
 export default function Layout() {
-  const { isYoungMode, profile } = useProgress()
+  const { isYoungMode, profile, levelUpData, closeLevelUp } = useProgress()
 
   return (
     <div
@@ -21,6 +22,13 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      {levelUpData.show && (
+        <LevelUpModal
+          oldLevel={levelUpData.oldLevel}
+          newLevel={levelUpData.newLevel}
+          onClose={closeLevelUp}
+        />
+      )}
     </div>
   )
 }

@@ -114,7 +114,6 @@ export default function ParentZone() {
           <li>Total XP earned: <strong>{progress.xp}</strong></li>
           <li>Current daily streak: <strong>{progress.streak} days</strong></li>
           <li>Badges earned: <strong>{progress.badges.length}</strong></li>
-          <li>Certificates: <strong>{progress.certificates.length}</strong></li>
         </ul>
       </div>
 
