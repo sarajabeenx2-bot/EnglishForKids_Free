@@ -1,0 +1,42 @@
+.word-of-day { margin-bottom: 1.5rem; border-left: 5px solid var(--sunshine-yellow); }
+.wod-content { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.wod-emoji { font-size: 4rem; }
+.wod-sentence { font-style: italic; color: var(--text-muted); margin-top: 0.5rem; }
+
+.flashcard {
+  text-align: center;
+  padding: 3rem 2rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  font-family: var(--font-body);
+  color: inherit;
+}
+
+.flash-emoji { font-size: 5rem; margin-bottom: 1rem; }
+.flash-meaning { font-size: 1.1rem; margin: 0.5rem 0; }
+.flash-sentence { color: var(--text-muted); font-style: italic; }
+.flash-hint { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; }
+
+.flash-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dict-card {
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+}
+
+.dict-emoji { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+.dict-card small { display: block; color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem; }

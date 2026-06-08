@@ -1,0 +1,68 @@
+.practice-notice {
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--accent-color, var(--sky-blue));
+  font-size: 0.95rem;
+}
+
+.mic-warning {
+  color: #e53e3e;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.conv-done {
+  color: var(--soft-green-dark);
+  font-weight: 600;
+  margin: 0.75rem 0;
+}
+
+.speaking-section { margin-bottom: 1.5rem; text-align: center; }
+.speaking-section h2 { margin-bottom: 1rem; }
+
+.practice-word { margin: 1.5rem 0; }
+.big-word {
+  font-size: 3rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--soft-green-dark);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.btn.recording {
+  animation: pulse 1s infinite;
+  background: #ff6b6b;
+  color: white;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.score-display {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: rgba(123, 198, 126, 0.15);
+}
+
+.score-display.great { background: rgba(255, 217, 61, 0.25); }
+.score-num { font-size: 3rem; font-family: var(--font-display); font-weight: 700; display: block; }
+
+.word-nav { margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: center; }
+
+.conversation { margin: 1.5rem 0; text-align: left; }
+.conv-prompt { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem; }
+.conv-response { color: var(--soft-green-dark); font-style: italic; }
+
+.reading-text {
+  font-size: 1.3rem;
+  padding: 1.5rem;
+  background: var(--sky-blue-light);
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+.correction { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; }

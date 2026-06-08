@@ -1,0 +1,23 @@
+.info-content h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.info-body h3 {
+  margin: 1.5rem 0 0.75rem;
+  color: var(--soft-green-dark);
+}
+
+.info-body p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.info-body ul {
+  margin: 0.75rem 0 1rem 1.5rem;
+}
+
+.info-body li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}

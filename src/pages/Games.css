@@ -1,0 +1,82 @@
+.game-card { text-align: center; text-decoration: none; color: inherit; }
+.game-emoji { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+.game-xp { display: inline-block; margin-top: 0.75rem; background: var(--sunshine-yellow); padding: 0.25rem 0.75rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; }
+
+.game-container { text-align: center; padding: 2rem; }
+
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.word-match-game {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.match-column { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.match-btn {
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--sky-blue-light);
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition);
+}
+
+.match-btn.selected { border-color: var(--sunshine-yellow); background: rgba(255, 217, 61, 0.2); }
+.match-btn.matched { background: var(--soft-green); color: white; border-color: var(--soft-green-dark); }
+
+.spelling-game-inline .spell-slots {
+  font-size: 2rem;
+  font-family: var(--font-display);
+  margin: 1rem 0;
+  letter-spacing: 0.3rem;
+}
+
+.vocab-hunt .hunt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.hunt-item {
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--sky-blue-light);
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition);
+}
+
+.hunt-item:hover { border-color: var(--soft-green); }
+.hunt-item.found { background: var(--soft-green); color: white; }
+
+.game-win {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--soft-green-dark);
+  margin-top: 1.5rem;
+  grid-column: 1 / -1;
+}
+
+.wrong-flash { animation: shake 0.4s ease; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.reading-race { text-align: center; }
+.race-word { font-size: 2rem; margin: 1.5rem 0; font-family: var(--font-display); }

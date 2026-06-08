@@ -1,0 +1,149 @@
+.hero {
+  padding: 2.5rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--soft-green-dark), var(--sky-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-mascots {
+  display: flex;
+  gap: 1rem;
+  font-size: 4rem;
+}
+
+.mascot.bounce {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+.mascot.delay-1 { animation-delay: -0.5s; }
+.mascot.delay-2 { animation-delay: -1s; }
+
+.welcome-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  border-left: 5px solid var(--sunshine-yellow);
+}
+
+.buddy-emoji { font-size: 3rem; }
+
+.welcome-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: auto;
+  text-align: center;
+}
+
+.welcome-stats strong {
+  display: block;
+  font-size: 1.5rem;
+  font-family: var(--font-display);
+}
+
+.progress-section { margin-bottom: 1.5rem; }
+
+.level-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+}
+
+.level-badge {
+  background: var(--sunshine-yellow);
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.level-step {
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.04);
+  opacity: 0.5;
+}
+
+.level-step.completed {
+  background: rgba(123, 198, 126, 0.2);
+  opacity: 1;
+}
+
+.level-step.current {
+  background: rgba(255, 217, 61, 0.3);
+  opacity: 1;
+  border: 2px solid var(--sunshine-yellow);
+}
+
+.level-num {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.level-name { font-size: 0.75rem; }
+
+.quick-links, .seasonal-section { margin-bottom: 2rem; }
+
+.quick-card {
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.quick-emoji { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+.quick-card h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+.quick-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+.seasonal-card { text-align: center; }
+.seasonal-emoji { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+.seasonal-card .btn { margin-top: 1rem; }
+
+.reward-choice {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  text-align: center;
+}

@@ -1,0 +1,79 @@
+.safe-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-left: 5px solid var(--soft-green);
+}
+
+.safe-banner span { font-size: 2.5rem; }
+
+.child-profile { margin-bottom: 1.5rem; }
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.report-card { text-align: center; }
+.report-card h3 { font-size: 0.95rem; margin-bottom: 0.75rem; }
+.report-num { font-size: 2.5rem; font-family: var(--font-display); font-weight: 700; color: var(--soft-green-dark); }
+
+.weekly-report, .monthly-report, .recommendations, .parent-controls { margin-bottom: 1.5rem; }
+
+.weekly-report ul, .recommendations ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.weekly-report li, .recommendations li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.monthly-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.monthly-stats .big {
+  display: block;
+  font-size: 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--soft-green-dark);
+}
+
+.parent-gate {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.pin-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.25rem;
+  text-align: center;
+  border: 3px solid var(--sky-blue-light);
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  font-family: var(--font-body);
+}
+
+.pin-error { color: #e53e3e; font-weight: 600; margin-bottom: 0.75rem; }
+
+.control-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  max-width: 320px;
+}
+
+.btn.danger { border-color: #ff6b6b; color: #e53e3e; }
+.btn.danger:hover { background: #fff5f5; }

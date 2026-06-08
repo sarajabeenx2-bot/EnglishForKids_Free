@@ -1,0 +1,65 @@
+.phonics-main { text-align: center; margin-bottom: 2rem; }
+
+.sound-display { margin-bottom: 1.5rem; }
+
+.sound-letter {
+  font-size: 6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--light-purple);
+}
+
+.sound-label { color: var(--text-muted); }
+
+.word-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.word-chip {
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  border: 2px solid var(--sky-blue-light);
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.word-chip:hover { background: var(--sky-blue-light); }
+
+.phonics-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.blend-display {
+  background: var(--sunshine-yellow);
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.phonics-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.phonics-card {
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.phonics-card.active { border-color: var(--soft-green); background: rgba(123, 198, 126, 0.15); }
+.phonics-char { font-size: 2rem; font-weight: 700; font-family: var(--font-display); display: block; }

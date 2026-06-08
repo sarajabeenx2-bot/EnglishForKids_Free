@@ -1,0 +1,53 @@
+.spelling-controls { margin-bottom: 1.5rem; }
+.spelling-controls .mode-tabs, .difficulty-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 0.75rem; }
+
+.spelling-game { text-align: center; max-width: 500px; margin: 0 auto; }
+.spell-hint { font-size: 1.1rem; margin-bottom: 1rem; }
+
+.spell-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 3px solid var(--sky-blue-light);
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+  font-family: var(--font-display);
+  text-transform: lowercase;
+}
+
+.spell-input.correct { border-color: var(--soft-green); background: rgba(123, 198, 126, 0.1); }
+.spell-input.wrong { border-color: #ff6b6b; background: rgba(255, 107, 107, 0.1); }
+
+.missing-display {
+  font-size: 2rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.builder-letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.letter-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 2px solid var(--sunshine-yellow);
+  background: var(--sunshine-yellow);
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-display);
+}
+
+.spell-actions { display: flex; gap: 0.75rem; justify-content: center; }
+.feedback-msg { margin-top: 1rem; font-weight: 600; }
+.feedback-msg.correct { color: var(--soft-green-dark); }
+.feedback-msg.wrong { color: #e53e3e; }
+.spell-score { margin-top: 1rem; font-weight: 700; }
